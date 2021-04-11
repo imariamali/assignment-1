@@ -64,7 +64,7 @@ class Quiz_Maker_Quiz_Category
 
         if (is_null($id)) {
             echo "<p class='wrong_shortcode_text' style='color:red;'>" . __('Wrong shortcode initialized', $this->plugin_name) . "</p>";
-            return false;
+            return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
         }
 
         $display = ( isset($attr['display']) && $attr['display'] != '' ) ? $attr['display'] : 'all';
@@ -74,7 +74,7 @@ class Quiz_Maker_Quiz_Category
 
         if (isset($category['published']) && $category['published'] == 0) {
 //            echo "<p class='wrong_shortcode_text' style='color:red;'>" . __('This category is', $this->plugin_name) . "</p>";
-            return false;
+            return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
         }
 
         $sql = "SELECT id FROM {$wpdb->prefix}aysquiz_quizes WHERE quiz_category_id = ". $id ." AND published=1 ";

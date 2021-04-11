@@ -237,12 +237,14 @@ class Quiz_Maker_All_Results
     }
 
     public function ays_generate_all_results_method() {
-
+        ob_start();
         $this->enqueue_styles();
         $this->enqueue_scripts();
-        $all_results_html = $this->ays_all_results_html();
 
-        return $all_results_html;
+        $all_results_html = $this->ays_all_results_html();
+        echo $all_results_html;
+
+        return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
     }
 
 

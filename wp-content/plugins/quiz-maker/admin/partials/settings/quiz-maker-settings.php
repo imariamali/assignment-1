@@ -56,7 +56,8 @@
         "end_date" => __( 'End date', $this->plugin_name ),
         "duration" => __( 'Duration', $this->plugin_name ),
         "score" => __( 'Score', $this->plugin_name ),
-        "details" => __( 'Details', $this->plugin_name )
+        "details" => __( 'Details', $this->plugin_name ),
+        "points" => __( 'Points', $this->plugin_name ),
     );
 
      // Aro Buttons Text
@@ -151,6 +152,15 @@
     // Start button activation
     $options['enable_start_button_loader'] = isset($options['enable_start_button_loader']) ? sanitize_text_field( $options['enable_start_button_loader'] ) : 'off';
     $enable_start_button_loader = (isset($options['enable_start_button_loader']) && sanitize_text_field( $options['enable_start_button_loader'] ) == "on") ? true : false;
+
+    // Leaderboard By Quiz Category Settings
+    $default_leadboard_column_names = array(
+        "pos" => __( 'Pos.', $this->plugin_name ),
+        "name" => __( 'Name', $this->plugin_name ),
+        "score" => __( 'Score', $this->plugin_name ),
+        "duration" => __( 'Duration', $this->plugin_name ),
+        "points" => __( 'Points', $this->plugin_name ),
+    );
 
 ?>
 <div class="wrap" style="position:relative;">
@@ -265,7 +275,32 @@
                                 <div class="col-sm-8">
                                     <input type="checkbox" class="ays-checkbox-input" id="ays_quiz_enable_question_allow_html" name="ays_quiz_enable_question_allow_html" value="on" <?php echo $quiz_enable_question_allow_html ? 'checked' : ''; ?> />
                                 </div>
-                        </div>
+                            </div>
+                            <div class="form-group row" style="padding:0px;margin:0;">
+                                <div class="col-sm-12" style="padding:20px;">
+                                    <div class="pro_features" style="">
+                                        <div style="margin-right:20px;">
+                                            <p style="font-size:20px;">
+                                                <?php echo __("This feature is available only in ", $this->plugin_name); ?>
+                                                <a href="https://ays-pro.com/wordpress/quiz-maker/" target="_blank" title="PRO feature"><?php echo __("PRO version!!!", $this->plugin_name); ?></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label for="ays_questions_default_keyword">
+                                                <?php echo __( "Keyword default count", $this->plugin_name ); ?>
+                                                <a class="ays_help" data-toggle="tooltip" title="<?php echo __('Specify the default keyword count which will be selected while adding answers to your new question. It will apply to the previous questions and intervals as well.',$this->plugin_name); ?>">
+                                                    <i class="ays_fa ays_fa_info_circle"></i>
+                                                </a>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="number" id="ays_keyword_default_max_value" class="ays-text-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </fieldset>
                         <hr>
                         <fieldset>
@@ -1124,6 +1159,167 @@
                                 </div>
                             </div>
                         </fieldset>
+                        <fieldset>
+                            <legend>
+                                <strong style="font-size:30px;">[ ]</strong>
+                                <h5 class="ays-subtitle"><?php echo __('Leaderboard By Quiz Category Settings',$this->plugin_name)?></h5>
+                            </legend>
+                            <blockquote>
+                                <?php echo __( "It is designed for a particular quiz category results.", $this->plugin_name ); ?>
+                            </blockquote>
+                            <hr>
+                            <div class="col-sm-12" style="padding:20px;">
+                                <div class="pro_features" style="">
+                                        <div style="margin-right:20px;">
+                                        <p style="font-size:20px;">
+                                                <?php echo __("This feature is available only in ", $this->plugin_name); ?>
+                                            <a href="https://ays-pro.com/wordpress/quiz-maker/" target="_blank" title="PRO feature"><?php echo __("PRO version!!!", $this->plugin_name); ?></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label for="ays_globLead_cat">
+                                            <?php echo __( "Shortcode", $this->plugin_name ); ?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('You can copy the shortcode and paste it to any post/page to see the list of the top user’s who passed any quiz.',$this->plugin_name)?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="ays_globLead_cat" class="ays-text-input" onclick="this.setSelectionRange(0, this.value.length)" readonly="" value='[ays_quiz_cat_gleaderboard id="Your Quiz Category ID"]'>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label for="ays_gleadboard_quiz_cat_count">
+                                            <?php echo __('Users count',$this->plugin_name)?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('How many users’ results will be shown in the leaderboard.',$this->plugin_name)?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="ays-text-input" id="ays_gleadboard_quiz_cat_count" value="5"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label for="ays_gleadboard_quiz_cat_width">
+                                            <?php echo __('Width',$this->plugin_name)?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('The width of the Leaderboard box. It accepts only numeric values. For 100% leave it blank.',$this->plugin_name)?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="ays-text-input" id="ays_gleadboard_quiz_cat_width" value="500"
+                                        />
+                                        <span style="display:block;" class="ays_quiz_small_hint_text"><?php echo __("For 100% leave blank", $this->plugin_name);?></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label>
+                                            <?php echo __('Group users by',$this->plugin_name);?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('Select the way for grouping the results. If you want to make Leaderboard for logged in users, then choose ID. It will collect results by WP user ID. If you want to make Leaderboard for guests, then you need to choose Email and enable Information Form and Email, Name options from quiz settings. It will group results by emails and display guests Names.',$this->plugin_name); ?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <label class="ays_quiz_loader">
+                                            <input type="radio" checked />
+                                            <span><?php echo __( "ID", $this->plugin_name); ?></span>
+                                        </label>
+                                        <label class="ays_quiz_loader">
+                                            <input type="radio" />
+                                            <span><?php echo __( "Email", $this->plugin_name); ?></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label>
+                                            <?php echo __('Show user’s result',$this->plugin_name);?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('Show the users’ Average, Maximum or Sum results in the leaderboard. SUM does not work with Score(table column)',$this->plugin_name);?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <label class="ays_quiz_loader">
+                                            <input type="radio" checked />
+                                            <span><?php echo __( "AVG", $this->plugin_name); ?></span>
+                                        </label>
+                                        <label class="ays_quiz_loader">
+                                            <input type="radio" />
+                                            <span><?php echo __( "MAX", $this->plugin_name); ?></span>
+                                        </label>
+                                        <label class="ays_quiz_loader">
+                                            <input type="radio" />
+                                            <span><?php echo __( "SUM", $this->plugin_name); ?></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label for="ays_gleadboard_quiz_cat_color">
+                                            <?php echo __('Color',$this->plugin_name);?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('Top color of the leaderboard',$this->plugin_name);?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="ays_gleadboard_quiz_cat_color" data-alpha="true" value="#99BB5A" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label for="ays_gleadboard_quiz_cat_custom_css">
+                                            <?php echo __('Custom CSS',$this->plugin_name);?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('Field for entering your own CSS code',$this->plugin_name);?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <textarea class="ays-textarea" id="ays_gleadboard_quiz_cat_custom_css" cols="30"
+                                              rows="10" style="height: 80px;"></textarea>
+                                    </div>
+                                </div> <!-- Custom global leadboard CSS -->
+                                <hr>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <label>
+                                            <?php echo __( "Leaderboard Columns", $this->plugin_name ); ?>
+                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('You can sort table columns and select which columns must display on the front-end.',$this->plugin_name);?>">
+                                                <i class="ays_fa ays_fa_info_circle"></i>
+                                            </a>
+                                        </label>
+                                        <div class="ays-show-user-page-table-wrap">
+                                            <ul class="ays-show-user-page-table">
+                                                <?php
+                                                    foreach ($default_leadboard_column_names as $key => $val) {
+                                                        ?>
+                                                        <li class="ays-user-page-option-row ui-state-default">
+                                                            <input type="checkbox" class="ays-checkbox-input" checked/>
+                                                            <label>
+                                                                <?php echo $val; ?>
+                                                            </label>
+                                                        </li>
+                                                        <?php
+                                                    }
+                                                 ?>
+                                            </ul>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <hr>
                         <hr/>
                         <fieldset>
                             <legend>
@@ -1325,6 +1521,133 @@
                             </div>
                         </fieldset>
                         <!-- Show Individual results end -->
+                        <hr>
+                        <!-- Display Questions start -->
+                        <fieldset>
+                            <legend>
+                                <strong style="font-size:30px;">[ ]</strong>
+                                <h5><?php echo __('Display Quiz Bank(questions)',$this->plugin_name); ?></h5>
+                            </legend>
+                            <div class="form-group row" style="padding:0px;margin:0;">
+                                <div class="col-sm-12" style="padding:20px;">
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label for="ays_quiz_display_questions">
+                                                <?php echo __( "Shortcode", $this->plugin_name ); ?>
+                                                <a class="ays_help" data-toggle="tooltip" title="<?php echo __('Paste the shortcode into any of your posts to show questions of a given quiz. Designed to show questions to students, earlier on, for preparing for the test.',$this->plugin_name); ?>">
+                                                    <i class="ays_fa ays_fa_info_circle"></i>
+                                                </a>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="ays_quiz_display_questions" class="ays-text-input" onclick="this.setSelectionRange(0, this.value.length)" readonly="" value='[ays_display_questions by="quiz/category" id="N" orderby="ASC"]'>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <blockquote>
+                                <ul class="ays-quiz-general-settings-blockquote-ul">
+                                    <li>
+                                        <?php
+                                            echo sprintf(
+                                                __( '%sBy%s', $this->plugin_name ) . ' - ' . __( 'Choose the method of filtering. Example: by="category".', $this->plugin_name ),
+                                                '<b>',
+                                                '</b>'
+                                            );
+                                        ?>
+                                        <ul class='ays-quiz-general-settings-ul'>
+                                            <li>
+                                                <?php
+                                                    echo sprintf(
+                                                        __( '%squiz%s', $this->plugin_name ) . ' - ' . __( 'If you set the method as Quiz, it will show all questions added in the given quiz.', $this->plugin_name ),
+                                                        '<b>',
+                                                        '</b>'
+                                                    );
+                                                ?>
+                                            </li>
+                                            <li>
+                                                <?php
+                                                    echo sprintf(
+                                                        __( '%scategory%s', $this->plugin_name ) . ' - ' . __( 'If you set the method as Category, it will show all questions assigned to the given category.', $this->plugin_name ),
+                                                        '<b>',
+                                                        '</b>'
+                                                    );
+                                                ?>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <?php
+                                            echo sprintf(
+                                                __( '%sID%s', $this->plugin_name ) . ' - ' . __( 'Select the ID. Example: id="23".', $this->plugin_name ),
+                                                '<b>',
+                                                '</b>'
+                                            );
+                                        ?>
+                                        <ul class='ays-quiz-general-settings-ul'>
+                                            <li>
+                                                <?php
+                                                    echo sprintf(
+                                                        __( '%squiz%s', $this->plugin_name ) . ' - ' . __( 'If you set the method as Quiz, please enter the ID of the given quiz.', $this->plugin_name ),
+                                                        '<b>',
+                                                        '</b>'
+                                                    );
+                                                ?>
+                                            </li>
+                                            <li>
+                                                <?php
+                                                    echo sprintf(
+                                                        __( '%scategory%s', $this->plugin_name ) . ' - ' . __( 'If you set the method as Category, please enter the ID of the given category.', $this->plugin_name ),
+                                                        '<b>',
+                                                        '</b>'
+                                                    );
+                                                ?>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <?php
+                                            echo sprintf(
+                                                __( '%sOrderby%s', $this->plugin_name ) . ' - ' . __( 'Choose the way of ordering the questions. Example: orderby="ASC".', $this->plugin_name ),
+                                                '<b>',
+                                                '</b>'
+                                            );
+                                        ?>
+                                        <ul class='ays-quiz-general-settings-ul'>
+                                            <li>
+                                                <?php
+                                                    echo sprintf(
+                                                        __( '%sASC%s', $this->plugin_name ) . ' - ' . __( 'The earliest created questions will appear at top of the list. The order will be classified based on question ID (oldest to newest).', $this->plugin_name ),
+                                                        '<b>',
+                                                        '</b>'
+                                                    );
+                                                ?>
+                                            </li>
+                                            <li>
+                                                <?php
+                                                    echo sprintf(
+                                                        __( '%sDESC%s', $this->plugin_name ) . ' - ' . __( 'The latest created questions will appear at top of the list. The order will be classified based on question ID (newest to oldest).', $this->plugin_name ),
+                                                        '<b>',
+                                                        '</b>'
+                                                    );
+                                                ?>
+                                            </li>
+                                            <li>
+                                                <?php
+                                                    echo sprintf(
+                                                        __( '%sdefault%s', $this->plugin_name ) . ' - ' . __( 'The order will be classified based on the reordering you have done while adding the questions to the quiz. It will work only with the by="quiz" method. The by="category" method will show the same order as orderby="ASC".', $this->plugin_name ),
+                                                        '<b>',
+                                                        '</b>'
+                                                    );
+                                                ?>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </blockquote>
+                        </fieldset>
+                        <!-- Display Questions end -->
                     </div>
                     <div id="tab4" class="ays-quiz-tab-content <?php echo ($ays_quiz_tab == 'tab4') ? 'ays-quiz-tab-content-active' : ''; ?>">
                         <p class="ays-subtitle">
@@ -1480,6 +1803,15 @@
                                         <?php echo __( "The count of answered questions of the user.", $this->plugin_name); ?>
                                     </span>
                                 </p>
+                                <p class="vmessage">
+                                    <strong>
+                                        <input type="text" onClick="this.setSelectionRange(0, this.value.length)" readonly value="%%score_by_answered_questions%%" />
+                                    </strong>
+                                    <span> - </span>
+                                    <span style="font-size:18px;">
+                                        <?php echo __( "The score of those questions which the given user answered(%). Skipped or unanswered questions will not be included in the calculation.", $this->plugin_name); ?>
+                                    </span>
+                                </p>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -1564,6 +1896,24 @@
                                     <span> - </span>
                                     <span style="font-size:18px;">
                                         <?php echo __( "The number of not answered of the user.", $this->plugin_name); ?>
+                                    </span>
+                                </p>
+                                <p class="vmessage">
+                                    <strong>
+                                        <input type="text" onClick="this.setSelectionRange(0, this.value.length)" readonly value="%%user_first_name%%" />
+                                    </strong>
+                                    <span> - </span>
+                                    <span style="font-size:18px;">
+                                        <?php echo __( "The user's first name that was filled in their WordPress site during registration.", $this->plugin_name); ?>
+                                    </span>
+                                </p>
+                                <p class="vmessage">
+                                    <strong>
+                                        <input type="text" onClick="this.setSelectionRange(0, this.value.length)" readonly value="%%user_last_name%%" />
+                                    </strong>
+                                    <span> - </span>
+                                    <span style="font-size:18px;">
+                                        <?php echo __( "The user's last name that was filled in their WordPress site during registration.", $this->plugin_name); ?>
                                     </span>
                                 </p>
                             </div>

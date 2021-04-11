@@ -412,6 +412,9 @@ class Quizes_List_Table extends WP_List_Table{
             // Buttons font size
             $buttons_font_size = (isset($_POST['ays_buttons_font_size']) && sanitize_text_field( $_POST['ays_buttons_font_size'] ) != "") ? sanitize_text_field( $_POST['ays_buttons_font_size'] ) : '17';
 
+            // Buttons font size
+            $buttons_width = (isset($_POST['ays_buttons_width']) && sanitize_text_field( $_POST['ays_buttons_width'] ) != "") ? sanitize_text_field( $_POST['ays_buttons_width'] ) : '';
+
             // Buttons Left / Right padding
             $buttons_left_right_padding = (isset($_POST['ays_buttons_left_right_padding']) && sanitize_text_field( $_POST['ays_buttons_left_right_padding'] ) != "") ? sanitize_text_field( $_POST['ays_buttons_left_right_padding'] ) : '20';
 
@@ -503,6 +506,18 @@ class Quizes_List_Table extends WP_List_Table{
             }else{
                 $custom_css = sanitize_text_field( $_POST['ays_custom_css'] );
             }
+
+            // Box Shadow X offset
+            $quiz_box_shadow_x_offset = (isset($_POST['ays_quiz_box_shadow_x_offset']) && sanitize_text_field( $_POST['ays_quiz_box_shadow_x_offset'] ) != '') ? intval( sanitize_text_field( $_POST['ays_quiz_box_shadow_x_offset'] ) ) : 0;
+
+            // Box Shadow Y offset
+            $quiz_box_shadow_y_offset = (isset($_POST['ays_quiz_box_shadow_y_offset']) && sanitize_text_field( $_POST['ays_quiz_box_shadow_y_offset'] ) != '') ? intval( sanitize_text_field( $_POST['ays_quiz_box_shadow_y_offset'] ) ) : 0;
+
+            // Box Shadow Z offset
+            $quiz_box_shadow_z_offset = (isset($_POST['ays_quiz_box_shadow_z_offset']) && sanitize_text_field( $_POST['ays_quiz_box_shadow_z_offset'] ) != '') ? intval( sanitize_text_field( $_POST['ays_quiz_box_shadow_z_offset'] ) ) : 15;
+
+            // Question text alignment
+            $quiz_question_text_alignment = (isset($_POST['ays_quiz_question_text_alignment']) && sanitize_text_field( $_POST['ays_quiz_question_text_alignment']) != '') ? sanitize_text_field( $_POST['ays_quiz_question_text_alignment'] ) : 'center';
 
             $options = array(
                 'quiz_version'                  => AYS_QUIZ_VERSION,
@@ -611,6 +626,7 @@ class Quizes_List_Table extends WP_List_Table{
                 'enable_audio_autoplay'         => $enable_audio_autoplay,
                 'buttons_size'                  => $buttons_size,
                 'buttons_font_size'             => $buttons_font_size,
+                'buttons_width'                 => $buttons_width,
                 'buttons_left_right_padding'    => $buttons_left_right_padding,
                 'buttons_top_bottom_padding'    => $buttons_top_bottom_padding,
                 'buttons_border_radius'         => $buttons_border_radius,
@@ -640,6 +656,10 @@ class Quizes_List_Table extends WP_List_Table{
                 'quiz_image_width_by_percentage_px' => $quiz_image_width_by_percentage_px,
                 'quiz_image_height'             => $quiz_image_height,
                 'quiz_bg_img_on_start_page'     => $quiz_bg_img_on_start_page,
+                'quiz_box_shadow_x_offset'      => $quiz_box_shadow_x_offset,
+                'quiz_box_shadow_y_offset'      => $quiz_box_shadow_y_offset,
+                'quiz_box_shadow_z_offset'      => $quiz_box_shadow_z_offset,
+                'quiz_question_text_alignment'  => $quiz_question_text_alignment,
             );
             $options['required_fields'] = !isset($_POST['ays_required_field']) ? null : array_map( 'sanitize_text_field', $_POST['ays_required_field'] );
             if( isset( $_POST['ays_enable_timer'] ) && sanitize_text_field( $_POST['ays_enable_timer'] ) == 'on' ){

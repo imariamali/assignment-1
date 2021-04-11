@@ -229,19 +229,21 @@ class Quiz_Maker_Quiz_All_Results
     }
 
     public function ays_generate_quiz_all_results_method( $attr ) {
-
+        ob_start();
         $id = (isset($attr['id']) && $attr['id'] != '') ? absint(intval($attr['id'])) : null;
 
         if (is_null($id)) {
             echo "<p class='wrong_shortcode_text' style='color:red;'>" . __('Wrong shortcode initialized', $this->plugin_name) . "</p>";
-            return false;
+            return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
         }
 
         $this->enqueue_styles();
         $this->enqueue_scripts();
+        
         $quiz_all_results_html = $this->ays_quiz_all_results_html( $id );
+        echo $quiz_all_results_html;
 
-        return $quiz_all_results_html;
+        return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
     }
 
 

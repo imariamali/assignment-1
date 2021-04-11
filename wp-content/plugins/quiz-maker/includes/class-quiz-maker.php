@@ -155,6 +155,8 @@ class Quiz_Maker {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/class-quiz-maker-quiz-all-results-shortcode.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/class-quiz-maker-display-questions-shortcode.php';
+
         /*
          * The class is responsible for showing quiz results in wordpress default WP_LIST_TABLE style
          */
@@ -264,6 +266,7 @@ class Quiz_Maker {
 		$plugin_public_quiz_category = new Quiz_Maker_Quiz_Category( $this->get_plugin_name(), $this->get_version() );
 		$plugin_public_results_page = new Quiz_Maker_All_Results( $this->get_plugin_name(), $this->get_version() );
 		$plugin_public_quiz_all_results_page = new Quiz_Maker_Quiz_All_Results( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public_display_questions = new Quiz_Maker_Display_Questions( $this->get_plugin_name(), $this->get_version() );
 
         $this->loader->add_action( 'wp_ajax_ays_finish_quiz', $plugin_public, 'ays_finish_quiz' );
         $this->loader->add_action( 'wp_ajax_nopriv_ays_finish_quiz', $plugin_public, 'ays_finish_quiz' );

@@ -16,7 +16,7 @@ ob_start();
  * Plugin Name:       Quiz Maker
  * Plugin URI:        https://ays-pro.com/index.php/wordpress/quiz-maker
  * Description:       This plugin allows you make unlimited number of quizes.
- * Version:           5.9.3
+ * Version:           6.0.3
  * Author:            Quiz Maker team
  * Author URI:        https://ays-pro.com/
  * License:           GPL-2.0+
@@ -36,8 +36,8 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'AYS_QUIZ_NAME_VERSION', '5.9.3' );
-define( 'AYS_QUIZ_VERSION', '5.9.3' );
+define( 'AYS_QUIZ_NAME_VERSION', '6.0.3' );
+define( 'AYS_QUIZ_VERSION', '6.0.3' );
 define( 'AYS_QUIZ_NAME', 'quiz-maker' );
 
 if( ! defined( 'AYS_QUIZ_DIR' ) )
@@ -170,6 +170,13 @@ function general_admin_notice(){
                 </div>
             </div>
          </div>
+
+        <div class="ays_ask_question_content">
+            <div class="ays_ask_question_content_inner">
+                <a href="https://bit.ly/2OonEJM" class="ays_quiz_question_link" target="_blank">Ask a question</a>
+                <img src="<?php echo AYS_QUIZ_ADMIN_URL.'/images/icons/ask-question.png'?>">
+            </div>
+        </div>
          <?php
             $ays_quiz_rate = intval(get_option('ays_quiz_rate_state'));
             $sql = "SELECT COUNT(*) AS res_count FROM {$wpdb->prefix}aysquiz_reports";

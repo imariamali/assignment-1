@@ -163,7 +163,7 @@
                                             $(this).removeClass('active-step')
                                         });
                                         aysAnimateStep(ays_quiz_container.data('questEffect'), currentStep, infoFormLast.parent());
-//                                        infoFormLast.parent().css('display', 'flex');
+                                       // infoFormLast.parent().css('display', 'flex');
                                         infoFormLast.parent().addClass('active-step'); 
                                     }
                                 }
@@ -347,7 +347,7 @@
                     $(this).attr('disabled', 'disabled');
                     $(this).off('change');
                     $(this).off('click');
-
+                    $(this).parents('.ays-field').addClass('ays-answered-text-input');
                     var input = $(this).parent().find('.ays-text-input');
                     var type = input.attr('type');
                     var userAnsweredText = input.val().trim();
@@ -1027,10 +1027,9 @@
                         break;
                     }
                     next_fs.find('.ays-question-counter').addClass(counterClass);
-//                    next_fs.find('.ays-question-counter').addClass('shake');
+
                 }
 
-//                next_siblings.css('display', 'flex');
                 if(next_siblings.eq(next_siblings.length-1).find('input[name^="ays_questions"]').attr('type')==='checkbox' && 
                    next_siblings.eq(next_siblings.length-1).find('.ays_buttons_div').find('.ays_fa_arrow_right').hasClass('ays_display_none') && 
                    next_siblings.eq(next_siblings.length-1).find('.ays_buttons_div').find('.ays_next').hasClass('ays_display_none')){
@@ -1131,7 +1130,13 @@
                         $(e.target).parents('.ays-quiz-container').find('.ays-live-bar-wrap').css('display','none');
                     },300)
                 }
-                $(e.target).parents().eq(3).find('input[name^="ays_questions"]').attr('disabled', false);
+                if ($(this).parents('form').hasClass('enable_correction')) {
+                    if (next_fs.find('.correct').length === 0 &&
+                        next_fs.find('.wrong').length === 0 &&
+                        next_fs.find('.ays-answered-text-input').length === 0) {
+                        next_fs.find('input[name^="ays_questions"]').attr('disabled', false);
+                    }
+                }
                 if (current_fs.hasClass('ays-abs-fs')) {
                     current_fs = $(this).parents('.step');
                     next_fs = $(this).parents('.step').next();
@@ -1151,7 +1156,6 @@
                         break;
                     }
                     next_fs.find('.ays-question-counter').addClass(counterClass);
-//                    next_fs.find('.ays-question-counter').addClass('shake');
                 }
                 current_fs.removeClass('active-step');
                 next_fs.addClass('active-step');
@@ -1333,10 +1337,18 @@
 
             }else{
                 if ($(this).parents('form').hasClass('enable_correction')) {
-                    if ($(this).parents('div[data-question-id]').prev().find('.correct').length !== 0 || $(this).parents('div[data-question-id]').prev().find('.wrong').length !== 0) {
-                        $(this).parents('div[data-question-id]').prev().find('input[name^="ays_questions"]').on('click',function () {
-                            return false;
-                        });
+                    if ($(this).parents('div[data-question-id]').prev().find('.correct').length === 0 &&
+                        $(this).parents('div[data-question-id]').prev().find('.wrong').length === 0 &&
+                        $(this).parents('div[data-question-id]').prev().find('.ays-answered-text-input').length === 0) {
+                        $(this).parents('div[data-question-id]').prev().find('input[name^="ays_questions"]').attr('disabled', false);
+                    }else{
+                        $(this).parents('div[data-question-id]').prev().find('input[name^="ays_questions"]').attr('disabled', true);
+                        if( $(this).parents('div[data-question-id]').prev().find('input[name^="ays_questions"]').attr('type') == 'checkbox' ){
+                            $(this).parents('div[data-question-id]').prev().find('input[name^="ays_questions"]').attr('disabled', false);
+                            $(this).parents('div[data-question-id]').prev().find('input[name^="ays_questions"][type="radio"]').on('click',function () {
+                                return false;
+                            });
+                        }
                     }
                 }
                 current_fs = $(this).parents('.step');
@@ -1359,7 +1371,6 @@
                     }
                 }
 
-                $(e.target).parents().eq(3).find('input[name^="ays_questions"]').attr('disabled', false);
                 if (current_fs.hasClass('ays-abs-fs')) {
                     current_fs = $(this).parent().parent().parent();
                     next_fs = $(this).parent().parent().parent().prev();

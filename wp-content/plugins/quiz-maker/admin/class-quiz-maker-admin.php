@@ -1043,13 +1043,13 @@ class Quiz_Maker_Admin
                                         }
                                     }
                                     $row .='<td>'.__('Correct answer',$this->plugin_name).':<br/>';
-                                    $row .= '<p class="success">' . htmlentities(do_shortcode(stripslashes($c_answer))) . '</p>';
+                                    $row .= '<p class="success">' . esc_attr(do_shortcode(stripslashes($c_answer))) . '</p>';
                                     $row .='</td>';
                                 }else{
                                     if($text_type == 'date'){
                                         $correct_answers = date( 'm/d/Y', strtotime( $correct_answers ) );
                                     }
-                                    $correct_answer_content = htmlentities( stripslashes( $correct_answers ) );
+                                    $correct_answer_content = esc_attr( stripslashes( $correct_answers ) );
                                     if($use_html){
                                         $correct_answer_content = stripslashes( $correct_answers );
                                     }
@@ -1061,7 +1061,7 @@ class Quiz_Maker_Admin
                                         $user_answered = date( 'm/d/Y', strtotime( $user_answered ) );
                                     }
                                 }
-                                $user_answer_content = htmlentities( stripslashes( $user_answered ) );
+                                $user_answer_content = esc_attr( stripslashes( $user_answered ) );
                                 if($use_html){
                                     $user_answer_content = stripslashes( $user_answered );
                                 }
@@ -1082,13 +1082,13 @@ class Quiz_Maker_Admin
                                 if($is_text_type && ! in_array($text_type, $not_multiple_text_types)){
                                     $c_answers = explode('%%%', $correct_answers);
                                     $row .= '<td>'.__('Correct answer',$this->plugin_name).':<br/>';
-                                    $row .= '<p class="success">' . htmlentities(do_shortcode(stripslashes($c_answers[0]))) . '</p>';
+                                    $row .= '<p class="success">' . esc_attr(do_shortcode(stripslashes($c_answers[0]))) . '</p>';
                                     $row .= '</td>';
                                 }else{
                                     if($text_type == 'date'){
                                         $correct_answers = date( 'm/d/Y', strtotime( $correct_answers ) );
                                     }
-                                    $correct_answer_content = htmlentities( stripslashes( $correct_answers ) );
+                                    $correct_answer_content = esc_attr( stripslashes( $correct_answers ) );
                                     if($use_html){
                                         $correct_answer_content = stripslashes( $correct_answers );
                                     }
@@ -1100,7 +1100,7 @@ class Quiz_Maker_Admin
                                         $user_answered = date( 'm/d/Y', strtotime( $user_answered ) );
                                     }
                                 }
-                                $user_answer_content = htmlentities( stripslashes( $user_answered ) );
+                                $user_answer_content = esc_attr( stripslashes( $user_answered ) );
                                 if($use_html){
                                     $user_answer_content = stripslashes( $user_answered );
                                 }
@@ -1120,8 +1120,8 @@ class Quiz_Maker_Admin
                         }elseif($calc_method == 'by_points'){
                             $row .= '<tr class="'.$tr_class.'">
                                         <td>'.__('Question',$this->plugin_name).' ' . $index . ' :<br/>' . (do_shortcode(stripslashes($question["question"]))) . '</td>
-                                        <td>'.__('User answered',$this->plugin_name).':<br/><p class="'.$ans_point_class.'">' . htmlentities(do_shortcode(stripslashes($user_answered))) . '</p></td>
-                                        <td>'.__('Answer point',$this->plugin_name).':<br/><p class="'.$ans_point_class.'">' . htmlentities($ans_point) . '</p></td>
+                                        <td>'.__('User answered',$this->plugin_name).':<br/><p class="'.$ans_point_class.'">' . esc_attr(do_shortcode(stripslashes($user_answered))) . '</p></td>
+                                        <td>'.__('Answer point',$this->plugin_name).':<br/><p class="'.$ans_point_class.'">' . esc_attr($ans_point) . '</p></td>
                                     </tr>';
                             
                         }

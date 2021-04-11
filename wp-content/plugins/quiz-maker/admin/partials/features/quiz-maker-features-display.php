@@ -348,6 +348,16 @@
                     <td><i class="ays_fa ays_fa_check"></i></td>
                     <td><i class="ays_fa ays_fa_check"></i></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4"><?php echo __('Personality quiz',$this->plugin_name)?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Personality quiz',$this->plugin_name)?></td>
+                    <td><span>–</span></td>
+                    <td><i class="ays_fa ays_fa_check"></i></td>
+                    <td><i class="ays_fa ays_fa_check"></i></td>
+                </tr>
                 <!-- //////////////// -->
                 <tr>
                     <td></td>

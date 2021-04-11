@@ -460,10 +460,10 @@ $quiz_hide_question_text = (isset($options['quiz_hide_question_text']) && $optio
                                     </td>
                                     <td>
                                         <input style="display:none;" class="ays-correct-answer" type="checkbox" name="ays-correct-answer[]" value="1" checked/>
-                                        <input type="<?php echo $question_type; ?>" name="ays-correct-answer-value[]" class="ays-correct-answer-value" value="<?php echo stripslashes(htmlentities($answer["answer"])); ?>"/>
+                                        <input type="<?php echo $question_type; ?>" name="ays-correct-answer-value[]" class="ays-correct-answer-value" value="<?php echo stripslashes(esc_attr($answer["answer"])); ?>"/>
                                     </td>
                                     <td>
-                                        <input type="text" name="ays-answer-placeholder[]" class="ays-correct-answer-value" value="<?php echo stripslashes(htmlentities($answer["placeholder"])); ?>"/>
+                                        <input type="text" name="ays-answer-placeholder[]" class="ays-correct-answer-value" value="<?php echo stripslashes(esc_attr($answer["placeholder"])); ?>"/>
                                     </td>
                                     <?php
                                         elseif($question["type"] == 'short_text'):
@@ -474,10 +474,10 @@ $quiz_hide_question_text = (isset($options['quiz_hide_question_text']) && $optio
                                     </td>
                                     <td>
                                         <input style="display:none;" class="ays-correct-answer" type="checkbox" name="ays-correct-answer[]" value="1" checked/>
-                                        <input type="<?php echo $question_type; ?>" name="ays-correct-answer-value[]" class="ays-correct-answer-value" value="<?php echo stripslashes(htmlentities($answer["answer"])); ?>"/>
+                                        <input type="<?php echo $question_type; ?>" name="ays-correct-answer-value[]" class="ays-correct-answer-value" value="<?php echo stripslashes(esc_attr($answer["answer"])); ?>"/>
                                     </td>
                                     <td>
-                                        <input type="text" name="ays-answer-placeholder[]" class="ays-correct-answer-value" value="<?php echo stripslashes(htmlentities($answer["placeholder"])); ?>"/>
+                                        <input type="text" name="ays-answer-placeholder[]" class="ays-correct-answer-value" value="<?php echo stripslashes(esc_attr($answer["placeholder"])); ?>"/>
                                     </td>
                                     <?php
                                         elseif($question["type"] == 'text'):
@@ -488,10 +488,10 @@ $quiz_hide_question_text = (isset($options['quiz_hide_question_text']) && $optio
                                     </td>
                                     <td>
                                         <input style="display:none;" class="ays-correct-answer" type="checkbox" name="ays-correct-answer[]" value="1" checked/>
-                                        <textarea type="text" name="ays-correct-answer-value[]" class="ays-correct-answer-value"><?php echo stripslashes(htmlentities($answer["answer"])); ?></textarea>
+                                        <textarea type="text" name="ays-correct-answer-value[]" class="ays-correct-answer-value"><?php echo stripslashes(esc_attr($answer["answer"])); ?></textarea>
                                     </td>
                                     <td>
-                                        <input type="text" name="ays-answer-placeholder[]" class="ays-correct-answer-value" value="<?php echo stripslashes(htmlentities($answer["placeholder"])); ?>"/>
+                                        <input type="text" name="ays-answer-placeholder[]" class="ays-correct-answer-value" value="<?php echo stripslashes(esc_attr($answer["placeholder"])); ?>"/>
                                     </td>
                                     <?php
                                     elseif($question["type"] == 'date'):
@@ -502,7 +502,7 @@ $quiz_hide_question_text = (isset($options['quiz_hide_question_text']) && $optio
                                     </td>
                                     <td>
                                         <input style="display:none;" class="ays-correct-answer" type="checkbox" name="ays-correct-answer[]" value="1" checked/>
-                                        <input type="date" name="ays-correct-answer-value[]" class="ays-date-input ays-correct-answer-value" placeholder="<?php echo "e. g. " . current_time( 'Y-m-d' ); ?>" value="<?php echo stripslashes(htmlentities($answer["answer"])); ?>">
+                                        <input type="date" name="ays-correct-answer-value[]" class="ays-date-input ays-correct-answer-value" placeholder="<?php echo "e. g. " . current_time( 'Y-m-d' ); ?>" value="<?php echo stripslashes(esc_attr($answer["answer"])); ?>">
                                     </td>
                                     <?php
                                         else:
@@ -526,7 +526,7 @@ $quiz_hide_question_text = (isset($options['quiz_hide_question_text']) && $optio
                                         </select>
                                     </td>
 
-                                    <td><input type="text" name="ays-correct-answer-value[]" class="ays-correct-answer-value" value="<?php echo stripslashes(htmlentities($answer["answer"])); ?>"/></td>
+                                    <td><input type="text" name="ays-correct-answer-value[]" class="ays-correct-answer-value" value="<?php echo stripslashes(esc_attr($answer["answer"])); ?>"/></td>
                                     <td title="This property aviable only in pro version">
                                         <label class='ays-label' for='ays-answer'>
                                             <a style="opacity: 0.4" href="https://ays-pro.com/wordpress/quiz-maker/" target="_blank" class="add-answer-image"><?php echo __('Add',$this->plugin_name)?></a>

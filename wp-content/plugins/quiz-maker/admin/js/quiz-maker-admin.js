@@ -483,7 +483,13 @@
         let ays_quiz_box_shadow_color_picker = {
             change: function (e) {
                 setTimeout(function () {
-                    $(document).find('.ays-quiz-live-container').css({'box-shadow': '0 0 15px 1px ' + e.target.value.hexToRgbA(0.5)});
+                    var x_offset = $(document).find('input#ays_quiz_box_shadow_x_offset').val() + "px ";
+                    var y_offset = $(document).find('input#ays_quiz_box_shadow_y_offset').val() + "px ";
+                    var z_offset = $(document).find('input#ays_quiz_box_shadow_z_offset').val() + "px ";
+
+                    var box_shadow = x_offset + y_offset + z_offset;
+
+                    $(document).find('.ays-quiz-live-container').css({'box-shadow': box_shadow + ' 1px ' + e.target.value.hexToRgbA(0.5)});
                 }, 1);
             }
         };
@@ -520,6 +526,12 @@
                 
             }
         };
+        var ays_gleadboard_quiz_cat_color_picker = {
+            defaultColor: '#99BB5A',
+            change: function (e) {
+                
+            }
+        };
         // PRO
         var ays_answers_border_color = {
             change: function (e) {
@@ -545,6 +557,7 @@
         
         $(document).find('#ays_leadboard_color').wpColorPicker(ays_ind_leaderboard_color_picker);
         $(document).find('#ays_gleadboard_color').wpColorPicker(ays_glob_leaderboard_color_picker);
+        $(document).find('#ays_gleadboard_quiz_cat_color').wpColorPicker(ays_gleadboard_quiz_cat_color_picker);
 
         // PRO
         $(document).find('#ays_answers_border_color').wpColorPicker(ays_answers_border_color);
@@ -583,13 +596,27 @@
         // });
         
         if($(document).find('#ays_enable_box_shadow').prop('checked')){
-            $(document).find('.ays-quiz-live-container').css({'box-shadow': '0 0 15px 1px ' + $(document).find('#ays-quiz-box-shadow-color').val().hexToRgbA(0.5)});
+            var x_offset = $(document).find('input#ays_quiz_box_shadow_x_offset').val() + "px ";
+            var y_offset = $(document).find('input#ays_quiz_box_shadow_y_offset').val() + "px ";
+            var z_offset = $(document).find('input#ays_quiz_box_shadow_z_offset').val() + "px ";
+
+            var box_shadow = x_offset + y_offset + z_offset;
+
+            $(document).find('.ays-quiz-live-container').css({'box-shadow': box_shadow + '1px ' + $(document).find('#ays-quiz-box-shadow-color').val().hexToRgbA(0.4)});
         }else{
             $(document).find('.ays-quiz-live-container').css({'box-shadow': 'none'});
         }
-        $(document).find('#ays_enable_box_shadow').on('change', function () {
-            if($(this).prop('checked')){
-                $(document).find('.ays-quiz-live-container').css({'box-shadow': '0 0 15px 1px' + $(document).find('#ays-quiz-box-shadow-color').val()});
+        $(document).find('#ays_enable_box_shadow, #ays_quiz_box_shadow_x_offset, #ays_quiz_box_shadow_y_offset, #ays_quiz_box_shadow_z_offset').on('change', function () {
+            var $this = $(document).find('#ays_enable_box_shadow');
+
+            if($this.prop('checked')){
+                var x_offset = $(document).find('input#ays_quiz_box_shadow_x_offset').val() + "px ";
+                var y_offset = $(document).find('input#ays_quiz_box_shadow_y_offset').val() + "px ";
+                var z_offset = $(document).find('input#ays_quiz_box_shadow_z_offset').val() + "px ";
+
+                var box_shadow = x_offset + y_offset + z_offset;
+
+                $(document).find('.ays-quiz-live-container').css({'box-shadow': box_shadow + '1px ' + $(document).find('#ays-quiz-box-shadow-color').val().hexToRgbA(0.4)});
             }else{
                 $(document).find('.ays-quiz-live-container').css({'box-shadow': 'none'});
             }
@@ -2556,25 +2583,27 @@
         //     }
         // });
 
-        $(document).find('#ays_buttons_font_size, #ays_buttons_top_bottom_padding, #ays_buttons_left_right_padding, #ays_buttons_border_radius').on('change', function(e){
+        $(document).find('#ays_buttons_font_size, #ays_buttons_top_bottom_padding, #ays_buttons_left_right_padding, #ays_buttons_border_radius, #ays_buttons_width').on('change', function(e){
             refreshLivePreview();
         });
         refreshLivePreview();
 
         function refreshLivePreview(){
-            let buttonsFontSize = $(document).find('#ays_buttons_font_size').val();
-            let buttonsLeftRightPadding = $(document).find('#ays_buttons_left_right_padding').val();
-            let buttonsTopBottomPadding = $(document).find('#ays_buttons_top_bottom_padding').val();
-            let buttonsBorderRadius = $(document).find('#ays_buttons_border_radius').val();
+            var buttonsFontSize = $(document).find('#ays_buttons_font_size').val();
+            var buttonsLeftRightPadding = $(document).find('#ays_buttons_left_right_padding').val();
+            var buttonsTopBottomPadding = $(document).find('#ays_buttons_top_bottom_padding').val();
+            var buttonsBorderRadius = $(document).find('#ays_buttons_border_radius').val();
+            var buttonsWidth = $(document).find('#ays_buttons_width').val();
 
             $(document).find('.ays_buttons_div input[name="next"]').css('font-size', buttonsFontSize + 'px');
             $(document).find('.ays_buttons_div input[name="next"]').css('padding', buttonsTopBottomPadding+'px '+ buttonsLeftRightPadding+'px');
             $(document).find('.ays_buttons_div input[name="next"]').css('border-radius', buttonsBorderRadius + 'px');
+            $(document).find('.ays_buttons_div input[name="next"]').css('min-width', buttonsWidth + 'px');
         }
 
         $(document).find('#ays_buttons_size').on('change', function(e){
-            let buttonsSize = $(document).find('#ays_buttons_size').val();
-            let buttonsFontSize,
+            var buttonsSize = $(document).find('#ays_buttons_size').val();
+            var buttonsFontSize,
                 buttonsLeftRightPadding,
                 buttonsTopBottomPadding,
                 buttonsBorderRadius;

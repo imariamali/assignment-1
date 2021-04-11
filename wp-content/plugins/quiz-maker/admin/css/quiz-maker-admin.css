@@ -261,6 +261,12 @@ select.ays-text-input.ays-text-input-short,
 input.ays-text-input.ays-text-input-short{
     width: 200px;
 }
+
+input.ays-text-input-90-width {
+    width: 90px;
+    max-width: 100%; 
+}
+
 textarea.ays-textarea{
     height: 200px;
     margin-top: 5px;
@@ -663,6 +669,19 @@ table.ays-intervals-table label.ays-label {
     #ays-quiz-general-settings-form .wp-picker-container .wp-color-result.button {
         padding: 0 0 0 25px;
     }
+}
+
+.ays-quiz-general-settings-blockquote-ul > li {
+    border-bottom: 1px solid rgb(85 85 85 / 30%);
+}
+
+.ays-quiz-general-settings-blockquote-ul > li:last-child {
+    border-bottom: unset;
+}
+
+.ays-quiz-general-settings-ul {
+    padding-left: 40px;
+    list-style: circle;
 }
 /*User Page Settings Table End*/
 
@@ -2462,6 +2481,14 @@ input[name=ays_quiz_theme]{
     content: "\f110";
     font-weight: 400;
 }
+.ays_fa_youtube_play::before{
+    content: "\f16a";
+    font-weight: 400;
+}
+.ays_fa_wordpress::before{
+    content: "\f19a";
+    font-weight: 400;
+}
 
 .ays-question-ordering .ays_fa_exchange::after {
     opacity: 1;
@@ -3619,4 +3646,151 @@ div.wrap .ays-quiz-wp-heading-inline{
     input.ays_toggle_loader_radio[type=radio]:checked:before {
         margin: 3px;
     }
+}
+
+
+
+div.ays_ask_question_content {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 99999;
+}
+
+div.ays_ask_question_content_inner {
+    position: relative;
+}
+
+a.ays_quiz_question_link {
+    position: absolute;
+    color: white;
+    text-decoration: none;
+    font-family: cursive;
+    width: 95%;
+    font-weight: bold;
+    box-shadow: unset;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotate(4deg);
+    height: 75%;
+}
+
+
+/* Community */
+@media (min-width: 1250px) {
+    .ays-quiz-community-wrap .ays-quiz-community-item {
+        width:calc(33.3333333% - 13.3333333px)
+    }
+
+    .ays-quiz-community-wrap .ays-quiz-community-item:nth-child(3n) {
+        margin-right: 0
+    }
+}
+
+@media (max-width: 1249px) {
+    .ays-quiz-community-wrap .ays-quiz-community-item {
+        width:calc(50% - 10px)
+    }
+
+    .ays-quiz-community-wrap .ays-quiz-community-item:nth-child(2n) {
+        margin-right: 0
+    }
+}
+
+@media (max-width: 767px) {
+    .ays-quiz-community-wrap .ays-quiz-community-item {
+        width:100%;
+        margin-right: 0
+    }
+}
+
+.ays-quiz-community-wrap {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 60px;
+}
+
+.ays-quiz-community-wrap *,
+.ays-quiz-community-wrap *::before,
+.ays-quiz-community-wrap *::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.ays-quiz-community-wrap .ays-quiz-community-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px
+}
+
+.ays-quiz-community-wrap .ays-quiz-community-item {
+    border: 1px solid #DDDDDD;
+    margin: 0 20px 20px 0;
+    background-color: #ffffff;
+    position: relative
+}
+
+.ays-quiz-community-wrap .ays-quiz-community-item-cover {
+    width: 100%;
+    height: 223px;
+    position: relative;
+    display: block
+}
+
+.ays-quiz-community-wrap .ays-quiz-community-item-img {
+    width: auto;
+    height: auto;
+    max-width: 80px;
+    max-height: 80px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 70px;
+    line-height: 80px;
+}
+
+.ays-quiz-community-wrap .ays-quiz-community-item-title {
+    margin: 17px 20px 10px 20px;
+    font-size: 16px
+}
+
+.ays-quiz-community-wrap .ays-quiz-community-item-desc {
+    margin: 0 20px 98px 20px;
+    font-size: 14px
+}
+
+.ays-quiz-community-wrap .ays-quiz-community-item-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 20px;
+    border-top: 1px solid #dddddd;
+    background-color: #F7F7F7
+}
+
+.ays-quiz-community-wrap .button {
+    background-color: #1c75a6;
+    color: #ffffff;
+    font-weight: bold;
+    border: 1px solid #0e6897;
+    padding: 12px;
+    height: auto;
+    line-height: 13px;
+    text-shadow: 1px 1px 1.5px rgba(0,0,0,0.35)
+}
+
+.ays-quiz-community-wrap .button:hover {
+    background: #008ec2;
+    border-color: #006799;
+    color: #fff;
 }

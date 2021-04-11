@@ -85,6 +85,13 @@ class Quiz_Theme_Elegant_Light extends Quiz_Maker_Public{
                     background-color: " . $this->hex2rgba($quiz->quizColors['Color'], '0.2') . ";
                     border: 1px solid " . $this->hex2rgba($quiz->quizColors['Color'], '0.8') . ";
                 }
+
+                #ays-quiz-container-" . $quiz_id . " section.ays_quiz_timer_container.ays_quiz_timer_bg_container,
+                #ays-quiz-container-" . $quiz_id . " section.ays_quiz_redirection_timer_container {
+                    background-color: " . $this->hex2rgba($quiz->quizColors['Color'], '0.2') . ";
+                    border: 1px solid " . $this->hex2rgba($quiz->quizColors['Color'], '0.8') . ";
+                    border-bottom: unset;
+                }
             </style>";
         
         $quiz->quizParts['quiz_additional_styles'] = $additional_css;

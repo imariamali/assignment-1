@@ -76,4 +76,11 @@ jQuery(document).ready(function ($) {
         }
         }
     });
+    
+    $(document).find('.ays_next.start_button').on('click', function(e){
+        var _this = $(this);
+        var container = _this.parents('.ays-quiz-container');
+
+        container.find('section.ays_quiz_timer_container').addClass('ays_quiz_timer_bg_container');
+    });
 });

@@ -318,6 +318,7 @@ class Results_List_Table extends WP_List_Table{
             case 'start_date':
             case 'end_date':
             case 'duration':
+            case 'status':
             case 'id':
                 return $item[ $column_name ];
                 break;
@@ -453,6 +454,30 @@ class Results_List_Table extends WP_List_Table{
         return $title;
     }
 
+    function column_status( $item ) {
+        global $wpdb;
+        if( !isset( $item['quiz_id'] ) || intval( $item['quiz_id'] ) == 0 ){
+            return '';
+        }
+
+        $sql = "SELECT options FROM " . $wpdb->prefix . "aysquiz_quizes WHERE id=" . intval( $item['quiz_id'] );
+        $quiz_options = $wpdb->get_var( $sql );
+        $quiz_options = $quiz_options != '' ? json_decode( $quiz_options, true ) : array();
+        $pass_score = isset( $quiz_options['pass_score'] ) && $quiz_options['pass_score'] != '' ? absint( $quiz_options['pass_score'] ) : 0;
+        $score = absint( $item['score'] );
+
+        $status = '';
+        if( $pass_score != 0 ){
+            if( $score >= $pass_score ){
+                $status = "<span style='color:green;font-weight:900;'><i class='ays_fa ays_fa_check' style='color:green;font-size: 18px'></i> " . __( "Passed", $this->plugin_name ) . "</span>";
+            }else{
+                $status = "<span style='color:brown;font-weight:900;'><i class='ays_fa ays_fa_times' style='font-size: 18px'></i> " . __( "Failed", $this->plugin_name ) . "</span>";
+            }
+        }
+
+        return $status;
+    }
+
     function isJSON($string){
        return is_string($string) && is_array(json_decode($string, true)) && (json_last_error() == JSON_ERROR_NONE) ? true : false;
     }
@@ -484,6 +509,7 @@ class Results_List_Table extends WP_List_Table{
             'end_date'              => __( 'End', $this->plugin_name ),
             'duration'              => __( 'Duration', $this->plugin_name ),
             'score'                 => __( 'Score', $this->plugin_name ),
+            'status'                => __( 'Status', $this->plugin_name ),
             'id'                    => __( 'ID', $this->plugin_name ),
         );
 
@@ -522,6 +548,7 @@ class Results_List_Table extends WP_List_Table{
         $sortable_columns = array(
             'user_phone',
             'end_date',
+            'status',
             'id'
         );
 

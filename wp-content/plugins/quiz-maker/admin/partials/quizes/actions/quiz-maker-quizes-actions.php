@@ -135,6 +135,7 @@ $options = array(
     'enable_audio_autoplay' => 'off',
     'buttons_size' => 'medium',
     'buttons_font_size' => '17',
+    'buttons_width' => '',
     'buttons_left_right_padding' => '20',
     'buttons_top_bottom_padding' => '10',
     'buttons_border_radius' => '3',
@@ -155,6 +156,10 @@ $options = array(
     'disable_hover_effect' => 'off',
     'quiz_loader_custom_gif_width' => 100,
     'show_answers_numbering' => 'none',
+    'quiz_box_shadow_x_offset' => 0,
+    'quiz_box_shadow_y_offset' => 0,
+    'quiz_box_shadow_z_offset' => 15,
+    'quiz_question_text_alignment' => 'center',
 );
 
 $quiz_intervals_default = array(
@@ -440,6 +445,9 @@ $buttons_size = (isset($options['buttons_size']) && $options['buttons_size'] != 
 // Buttons font size
 $buttons_font_size = (isset($options['buttons_font_size']) && $options['buttons_font_size'] != "") ? $options['buttons_font_size'] : '17';
 
+// Buttons font size
+$buttons_width = (isset($options['buttons_width']) && $options['buttons_width'] != "") ? $options['buttons_width'] : '';
+
 // Buttons Left / Right padding
 $buttons_left_right_padding = (isset($options['buttons_left_right_padding']) && $options['buttons_left_right_padding'] != '') ? $options['buttons_left_right_padding'] : '20';
 
@@ -531,6 +539,18 @@ $quiz_image_height = (isset($options['quiz_image_height']) && sanitize_text_fiel
 $options['quiz_bg_img_on_start_page'] = isset($options['quiz_bg_img_on_start_page']) ? $options['quiz_bg_img_on_start_page'] : 'off';
 $quiz_bg_img_on_start_page = (isset($options['quiz_bg_img_on_start_page']) && $options['quiz_bg_img_on_start_page'] == 'on') ? true : false;
 
+//  Box Shadow X offset
+$quiz_box_shadow_x_offset = (isset($options['quiz_box_shadow_x_offset']) && sanitize_text_field( $options['quiz_box_shadow_x_offset'] ) != '' && sanitize_text_field( $options['quiz_box_shadow_x_offset'] ) != 0) ? intval( sanitize_text_field( $options['quiz_box_shadow_x_offset'] ) ) : 0;
+
+//  Box Shadow Y offset
+$quiz_box_shadow_y_offset = (isset($options['quiz_box_shadow_y_offset']) && sanitize_text_field( $options['quiz_box_shadow_y_offset'] ) != '' && sanitize_text_field( $options['quiz_box_shadow_y_offset'] ) != 0) ? intval( sanitize_text_field( $options['quiz_box_shadow_y_offset'] ) ) : 0;
+
+//  Box Shadow Z offset
+$quiz_box_shadow_z_offset = (isset($options['quiz_box_shadow_z_offset']) && sanitize_text_field( $options['quiz_box_shadow_z_offset'] ) != '' && sanitize_text_field( $options['quiz_box_shadow_z_offset'] ) != 0) ? intval( sanitize_text_field( $options['quiz_box_shadow_z_offset'] ) ) : 15;
+
+// Question text alignment
+$quiz_question_text_alignment = (isset($options['quiz_question_text_alignment']) && sanitize_text_field( $options['quiz_question_text_alignment'] ) != '') ? sanitize_text_field( $options['quiz_question_text_alignment'] ) : 'center';
+
 ?>
 <style id="ays_live_custom_css"></style>
 <div class="wrap">
@@ -550,7 +570,7 @@ $quiz_bg_img_on_start_page = (isset($options['quiz_bg_img_on_start_page']) && $o
             </h1>
             <div>
                 <p class="ays-subtitle">
-                    <strong class="ays_quiz_title_in_top"><?php echo stripslashes(htmlentities($quiz['title'])); ?></strong>
+                    <strong class="ays_quiz_title_in_top"><?php echo stripslashes(esc_attr($quiz['title'])); ?></strong>
                 </p>
                 <?php if($id !== null): ?>
                 <div class="row">
@@ -615,7 +635,7 @@ $quiz_bg_img_on_start_page = (isset($options['quiz_bg_img_on_start_page']) && $o
                     </div>
                     <div class="col-sm-10">
                         <input type="text" class="ays-text-input" id='ays-quiz-title' name='ays_quiz_title'
-                               value="<?php echo stripslashes(htmlentities($quiz['title'])); ?>"/>
+                               value="<?php echo stripslashes(esc_attr($quiz['title'])); ?>"/>
                     </div>
                 </div>
                 <hr/>
@@ -1308,17 +1328,34 @@ $quiz_bg_img_on_start_page = (isset($options['quiz_bg_img_on_start_page']) && $o
                                            <?php echo ($enable_box_shadow == 'on') ? 'checked' : ''; ?>/>
                                     <label for="ays_enable_box_shadow" class="ays_switch_toggle">Toggle</label>
                                     <div class="col-sm-12 ays_toggle_target ays_divider_top" style="margin-top: 10px; padding-top: 10px; <?php echo ($enable_box_shadow == 'on') ? '' : 'display:none;' ?>">
-                                        <label for="ays-quiz-box-shadow-color">
-                                            <?php echo __('Box shadow color',$this->plugin_name)?>
-                                            <a class="ays_help" data-toggle="tooltip" title="<?php echo __('The color of the shadow of the quiz container',$this->plugin_name)?>">
-                                                <i class="ays_fa ays_fa_info_circle"></i>
-                                            </a>
-                                         </label>
-                                        <input type="text" class="ays-text-input" id='ays-quiz-box-shadow-color'
-                                               name='ays_quiz_box_shadow_color'
-                                               data-alpha="true"
-                                               data-default-color="#000000"
-                                               value="<?php echo $box_shadow_color; ?>"/>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <label for="ays-quiz-box-shadow-color">
+                                                    <?php echo __('Box shadow color',$this->plugin_name)?>
+                                                    <a class="ays_help" data-toggle="tooltip" title="<?php echo __('The color of the shadow of the quiz container',$this->plugin_name ); ?>">
+                                                        <i class="ays_fa ays_fa_info_circle"></i>
+                                                    </a>
+                                                 </label>
+                                                <input type="text" class="ays-text-input" id='ays-quiz-box-shadow-color' name='ays_quiz_box_shadow_color' data-alpha="true" data-default-color="#000000" value="<?php echo $box_shadow_color; ?>"/>
+                                           </div>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-3" style="display: inline-block;">
+                                                    <span class="ays_quiz_small_hint_text"><?php echo __('X', $this->plugin_name); ?></span>
+                                                    <input type="number" class="ays-text-input ays-text-input-90-width" id='ays_quiz_box_shadow_x_offset' name='ays_quiz_box_shadow_x_offset' value="<?php echo $quiz_box_shadow_x_offset; ?>" />
+                                                </div>
+                                                <div class="col-sm-3 ays_divider_left" style="display: inline-block;">
+                                                    <span class="ays_quiz_small_hint_text"><?php echo __('Y', $this->plugin_name); ?></span>
+                                                    <input type="number" class="ays-text-input ays-text-input-90-width" id='ays_quiz_box_shadow_y_offset' name='ays_quiz_box_shadow_y_offset' value="<?php echo $quiz_box_shadow_y_offset; ?>" />
+                                                </div>
+                                                <div class="col-sm-3 ays_divider_left" style="display: inline-block;">
+                                                    <span class="ays_quiz_small_hint_text"><?php echo __('Z', $this->plugin_name); ?></span>
+                                                    <input type="number" class="ays-text-input ays-text-input-90-width" id='ays_quiz_box_shadow_z_offset' name='ays_quiz_box_shadow_z_offset' value="<?php echo $quiz_box_shadow_z_offset; ?>" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1626,6 +1663,31 @@ $quiz_bg_img_on_start_page = (isset($options['quiz_bg_img_on_start_page']) && $o
                                     <label for="ays_disable_hover_effect" class="ays_switch_toggle">Toggle</label>
                                 </div>
                             </div> <!-- Disable answer hover -->
+                            <hr/>
+                            <div class="form-group row">
+                                <div class="col-sm-5">
+                                    <label for="ays_limitation_message">
+                                        <?php echo __( 'Question text alignment', $this->plugin_name ); ?>
+                                        <a class="ays_help" data-toggle="tooltip" data-html="true" title="<?php echo __( 'Align the text of your questions to the left, center, or right.', $this->plugin_name ); ?>">
+                                            <i class="ays_fa ays_fa_info_circle"></i>
+                                        </a>
+                                    </label>
+                                </div>
+                                <div class="col-sm-7 ays_divider_left">
+                                    <div class="form-check form-check-inline checkbox_ays">
+                                        <input type="radio" id="ays_quiz_question_text_alignment_left" class="form-check-input" name="ays_quiz_question_text_alignment" value="left" <?php echo ($quiz_question_text_alignment == 'left') ? 'checked' : ''; ?>/>
+                                        <label class="form-check-label" for="ays_quiz_question_text_alignment_left"><?php echo __( 'Left', $this->plugin_name ); ?></label>
+                                    </div>
+                                    <div class="form-check form-check-inline checkbox_ays">
+                                        <input type="radio" id="ays_quiz_question_text_alignment_center" class="form-check-input" name="ays_quiz_question_text_alignment" value="center" <?php echo ($quiz_question_text_alignment == 'center') ? 'checked' : ''; ?>/>
+                                        <label class="form-check-label" for="ays_quiz_question_text_alignment_center"><?php echo __( 'Center', $this->plugin_name ); ?></label>
+                                    </div>
+                                    <div class="form-check form-check-inline checkbox_ays">
+                                        <input type="radio" id="ays_quiz_question_text_alignment_right" class="form-check-input" name="ays_quiz_question_text_alignment" value="right" <?php echo ($quiz_question_text_alignment == 'right') ? 'checked' : ''; ?>/>
+                                        <label class="form-check-label" for="ays_quiz_question_text_alignment_right"><?php echo __( 'Right', $this->plugin_name ); ?></label>
+                                    </div>
+                                </div>
+                            </div> <!-- Question text alignment -->
                             <hr/>
                             <div class="form-group row">
                                 <div class="col-sm-12 only_pro" style="padding:10px 0 0 10px;">
@@ -1943,6 +2005,21 @@ $quiz_bg_img_on_start_page = (isset($options['quiz_bg_img_on_start_page']) && $o
                                 </div>
                                 <div class="col-sm-7 ays_divider_left">
                                     <input type="number" class="ays-text-input ays-text-input-short" id='ays_buttons_font_size'name='ays_buttons_font_size' value="<?php echo $buttons_font_size; ?>"/>
+                                </div>
+                            </div> <!-- Buttons font size -->
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-sm-5">
+                                    <label for='ays_buttons_width'>
+                                        <?php echo __('Button width', $this->plugin_name); ?> (px)
+                                        <a class="ays_help" data-toggle="tooltip" title="<?php echo __('Set the button width in pixels. For an initial width, leave the field blank.', $this->plugin_name); ?>">
+                                            <i class="ays_fa ays_fa_info_circle"></i>
+                                        </a>
+                                    </label>
+                                </div>
+                                <div class="col-sm-7 ays_divider_left">
+                                    <input type="number" class="ays-text-input ays-text-input-short" id='ays_buttons_width'name='ays_buttons_width' value="<?php echo $buttons_width; ?>"/>
+                                    <span style="display:block;" class="ays_quiz_small_hint_text"><?php echo __('For an initial width, leave the field blank.', $this->plugin_name); ?></span>
                                 </div>
                             </div> <!-- Buttons font size -->
                             <hr>
@@ -4251,6 +4328,25 @@ $quiz_bg_img_on_start_page = (isset($options['quiz_bg_img_on_start_page']) && $o
                             <div class="col-sm-8 ays_divider_left" id="ays_mail_message_div">
                                 <div class="form-group row">
                                     <div class="col-sm-3">
+                                        <label for="ays_enable_send_mail_to_user_by_pass_score">
+                                            <?php echo __('Pass score (%)', $this->plugin_name); ?>
+                                            <a  class="ays_help" data-toggle="tooltip" title="<?php echo __('If the option is enabled, then the user will receive the email only if he/she has passed the minimum score required. It will take the value of the general pass score of the quiz. Please specify it in the Result Settings tab.',$this->plugin_name); ?>">
+                                                <i class=""></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="checkbox" class="ays-enable-timerl" value="on" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <blockquote><?php echo __( 'Tick the checkbox, and the user will receive the email only if he/she has passed the minimum score required.', $this->plugin_name ); ?></blockquote>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
                                         <label class="ays-disable-setting"><?php echo __('Mail message',$this->plugin_name)?></label>
                                     </div>
                                     <div class="col-sm-9">
@@ -4351,6 +4447,25 @@ dated
                                 <input type="checkbox" class="ays-enable-timerl" id="ays_enable_mail_admin" value="on"/>
                             </div>
                             <div class="col-sm-8 ays_divider_left">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="ays_enable_send_mail_to_admin_by_pass_score">
+                                            <?php echo __('Pass score (%)', $this->plugin_name); ?>
+                                            <a  class="ays_help" data-toggle="tooltip" title="<?php echo __('If the option is enabled, then the admin will receive the email only if the user has passed the minimum score required. It will take the value of the general pass score of the quiz. Please specify it in the Result Settings tab.',$this->plugin_name); ?>">
+                                                <i class=""></i>
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="checkbox" class="ays-enable-timerl" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <blockquote><?php echo __( 'Tick the checkbox, and admin will receive the email only if the user has passed the minimum score required.', $this->plugin_name ); ?></blockquote>
+                                    </div>
+                                </div>
+                                <hr>
                                 <!-- ................ -->
                                 <div class="form-group row">
                                     <div class="col-sm-3">
@@ -4508,7 +4623,7 @@ dated
                                 </label>
                             </div>
                             <div class="col-sm-1">
-                                <input type="checkbox" checked class="ays-enable-timer1" id="ays_enable_mailchimp"/>
+                                <input type="checkbox" class="ays-enable-timer1" id="ays_enable_mailchimp"/>
                             </div>
                         </div>
                         <hr>
@@ -4550,7 +4665,7 @@ dated
                                     </label>
                                 </div>
                                 <div class="col-sm-1">
-                                    <input type="checkbox" class="ays-enable-timer1" id="ays_enable_paypal" value="on" checked/>
+                                    <input type="checkbox" class="ays-enable-timer1" id="ays_enable_paypal" value="on"/>
                                 </div>
                             </div>
                             <hr>

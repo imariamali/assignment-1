@@ -4,7 +4,7 @@ Donate link: https://ays-pro.com/wordpress/quiz-maker
 Tags:  quiz maker, exam, quiz, test, questionnaire
 Requires at least: 4.0
 Tested up to: 5.7
-Stable tag: 5.9.3
+Stable tag: 6.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,7 +13,7 @@ QUIZ MAKER plugin allows you to make an unlimited number of Quizzes, Exams and T
 == Description ==
 
 
-### Wordpress Quiz maker
+### Wordpress Quiz maker plugin
 
 * [Quiz Maker Homepage](https://ays-pro.com/wordpress/quiz-maker/)
 * [Quiz Maker Free Demo](https://quiz-plugin.com/wordpress-quiz-plugin-free-demo/)
@@ -21,17 +21,19 @@ QUIZ MAKER plugin allows you to make an unlimited number of Quizzes, Exams and T
 
 https://www.youtube.com/watch?v=KeBSrdUHeEE
 
-With our Quiz Maker plugin it's easy to make a quiz in a short time. Just follow a few simple steps to create online quizzes. What you need to do first is to make questions and then include them in your quiz. You are free to choose the types of questions. Those are the following:
+Quiz Maker plugin allows you to create advanced quizzes and exams easily and quickly. Just follow a few simple steps to create online quizzes. What you need to do first is to make questions and then include them in your quiz. You are free to choose the types of questions. There are 7 types of questions available to use:
 
-**Radio**, which is the single choice with one right answer.
-**Checkbox**, which is also the multiple choice but it can include several right answers.
-**Dropdown**, which is the same single choice with one right answer, but it occupies less place.
-**Text**, which is the text input for typing the answer. You can provide right answer from the dashboard.
-**Number**, which is the same text type, but the user can type only numbers in it.
+**Radio** - a multiple-choice question(MCQ) with one right answer.
+**Checkbox** - a multiple-choice question(MCQ) with more than one right answer.
+**Dropdown** - a multiple-choice question(MCQ) with one right answer presented in a form of a dropdown list.
+**Text** - a question that needs to be answered by typing in.
+**Short text** - a question that needs to be answered by typing in shortly.
+**Number** - a question that needs to be answered by typing in a number.
+**Date** - a question that needs to be answered by picking a date.
 
 [Example quiz with question types](https://quiz-plugin.com/quiz-with-different-question-types/)
 
-*Looking for the best quiz plugin for WordPress?* This plugin allows you to make an unlimited number of quizzes. Each QUIZ can include unlimited questions. Questions can be a single choice, multiple-choice, dropdown, text and number. The plugin is very  **user-friendly** and **easy to use**. With this WordPress questionnaire plugin you can also categorize the **questions and quizzes**.
+*Are you looking for the best WordPress quiz plugin ?* This plugin allows you to make an unlimited number of quizzes. Each QUIZ can include unlimited questions. Questions can be a single choice, multiple-choice, dropdown, text and number. The plugin is very  **user-friendly** and **easy to use**. With this WordPress questionnaire plugin you can also categorize the **questions and quizzes**.
 
 == WordPress Quiz, Exam and Test maker plugin features ==
 
@@ -43,77 +45,93 @@ For creating simple quiz you need to follow these steps:
 - Add quiz from Quizzes page and insert questions into the quiz
 That's all.
 
-To insert the Quiz into a Page, Post or text widget, copy shortcode [ays_quiz id='quiz_id'] and paste it at the desired place in the editor.
+To insert the Quiz into a **Page, Post or text widget**, copy shortcode [ays_quiz id='quiz_id'] and paste it at the desired place in the editor.
 > <strong>Quiz shortcode</strong><br>
 > <strong>[ays_quiz id='quiz_id']</strong>
 
+= Customizable questions =
+
+You can make fully customizable questions by using the **built-in text editor**. It gives you an opportunity to format the text easily and effortlessly. You can add **image, audio, and video questions**. If you are a techy guy, you are free to use your HTML and CSS skills and fulfill all your needs. Last but not least, you can insert a shortcode of another plugin in the question.  
+
 = Quiz settings =
 
-There is a lot of settings in the quiz dashboard.
-Here is the list of some quiz settings.
+This WordPress test plugin offers dozens of options(100+) to take your quiz building to an advanced level. It allows you to fully customize all parts of your exam. 
+Here are presented some of those settings:
 
 * Randomize questions  
 * Randomize answers
 * Question bank - Example: insert 100 questions in the quiz and then enable and set this option 20. Every time the plugin will get 20 questions from 100 randomly.
-* Disable data storing in your database
-* Intervals [PRO](https://ays-pro.com/wordpress/quiz-maker/)  - show different messages according the user's score.
+* Buttons text - change the buttons texts of your quizzes by going to the **General Settings** page 
+* Schedule - Arrange your quiz to be available for your users at a certain time.
+* Show answers and explanation - Write in explanation for each question separately and display them when the user answers it.
+* Redirect users - Redirect your quiz takers to another page after quiz completion.
+* Pass score - Specify the passing score of your exam and show different result messages to passed and failed users.
+* Intervals [PRO](https://ays-pro.com/wordpress/quiz-maker/)  - show different messages according to the user's score. This functionality allows you to create a **Personality quiz**. 
 
 
 = Quiz with timer =
 
-You can set a timer for your quiz and if the timer ends quiz will be submitted automatically. A quiz timer option is very useful for making an exam or test. So we can call it WordPress Exam plugin too. 
+You can set a timer for your quiz and when the timer ends,the quiz will be submitted automatically. A quiz timer option is very useful for making an online exam or test. So we can call it WordPress Exam plugin too. 
 
 
 = Quiz results, scores and data form =
 
 After successful completion of the quiz, you can track from your dashboard your visitors' results, duration, when they start and when they end the quiz.
-We have created beautiful form and you can choose fields of the form from the dashboard and assign this form to your quiz ( After quiz or Before quiz ) and when the user finishes the quiz you can collect data and have beautiful statistics on your dashboard. This data allows you to create your email and SMS marketing, which will attract much more users from your specific target.
+We have created beautiful form and you can choose fields of the form from the dashboard and assign this form to your quiz ( After or Before quiz ) and when the user finishes the quiz you can collect data and have beautiful **statistics** on your dashboard. This data allows you to create your **email and SMS marketing**, which will attract much more users from your specific target.
 There are 3 static form fields in the free version` name, email and phone. For more custom fields you need to upgrade to the [PRO](https://ays-pro.com/wordpress/quiz-maker/) version.
-Also, results' statistics with graphs and export functionality available only in the Pro version.
+Also, results' statistics with **graphs and export functionality** available only in the Pro version.
 
 
-= User report in the front-end =
+= Results page on the front-end =
 
 You are free to choose what your visitors should see after completion of the **Quiz, Exam or Test**.
 - Show progress bar with the percentage on the final step
 - Show only percentage of result
+- Show **fail or pass messages**
 - Show user mistakes on final page
 - Show correct answers of each question (if the user selected wrong answer this question will be marked with red marker and when user selected right answer question will be marked with green marker)
+- Make use of **Message variables** to show user data individually such as user name, results by category, wrong and right answers count, quiz time, and so on.
 In the Premium version there is a shortcode for registered users, which you can paste in users page for showing their history.
+
 
 = Survey =
 
-Using our plugin you can make a Survey too. We have made text and number question types and also "Not influence to the score" option.
-It means that questions will not be counted for the final result. It stands as a survey plugin too. Also, you can make quiz and survey mix. You can enable the "Hide score" option from the quiz settings and you will just collect the data which users filled in the survey.
+Using our plugin you can make a Survey too. We have made text and number question types and also **No influence to the score** option.
+It means that questions will not be counted for the final result. It stands as a survey plugin too. Also, you can make quiz and survey mix. You can enable the **Hide score** option from the quiz settings and you will just collect the data which users filled in the survey.
 Check out the [Survey Demo](https://quiz-plugin.com/wordpress-quiz-plugin-free-demo/#ays-quiz-container-14).
 
 = Quick Quiz =
 
-We have created also another huge opportunity. You can create a quick quiz from the dashboard without visiting questions page or quiz page. Just click on a quick quiz button and you'll see a modal window with an opportunity to add questions and save the quiz, but note that it is only for adding a new quiz. For editing quiz you should do the steps as usually you edit quizzes or questions.
+We have also created  another huge opportunity. You can create a quick quiz from the dashboard without visiting the questions page or quiz page. Just click on a quick quiz button and you'll see a **modal window** with an opportunity to add questions and save the quiz, but note that it is only for adding a new quiz. For editing quiz you should do the steps as usually you edit quizzes or questions.
 
 = Quiz themes, styles and live preview =
 
-There is 6 themes available for making awesome quizzes.
-You can choose one of them and then customize it with our 15+ style options (colors, backgrounds, borders). Also, there is a live preview feature in the style section in the dashboard, which allows the admin to see every change of options. There is no need to save and go to the front-end to see changes in styles. Have fun!
-
-= Image questions and quiz =
-
-WordPress Quiz plugin allows you to add images to your quiz and questions. Also, you can style your quiz to satisfy your visitors. 
+There are 6 themes available for making awesome quizzes.
+You can choose one of them and then customize it with our 40+ style options (colors, backgrounds, borders). Also, there is a **live preview** feature in the style section in the dashboard, which allows the admin to see every change of options. There is no need to save and go to the front-end to see changes in styles. *Have fun!*
 
 = Quiz user restriction =
 
-You can restrict your users by enabling and selecting user roles from the dashboard and only selected users with given roles can pass your quiz. If you don't want to restrict your quiz by role, we have created another opportunity for you, just enable **"Only for logged in users"** option and write some message to non-logged in users, by this way you can enlarge your community. If your quiz is interesting non-registered users will register on your website for passing the quiz and you will have ultra **traffic** on your website. Please note that by selecting restriction by user roles quiz will automatically select only for logged in users option.
+You can restrict your users by enabling and selecting user roles from the dashboard and only selected users with given roles can pass your quiz. If you don't want to restrict your quiz by role, we have created another opportunity for you, just enable **"Only for logged in users"** option and write some message to non-logged in users, by this way you can enlarge your community. If your quiz is interesting non-registered users will register on your website for passing the quiz and you will have ultra **traffic** on your website. Please note that by selecting restriction by user roles,the quiz will automatically select only for logged in users option.
 
 = Quiz social sharing =
 
-Also, users can share your quiz, test or exam in their social networks **(facebook, linkedin, twitter)**, which is important for your **SMM** and increase your **website traffic** and popularity.
+Also, users can share your quiz, test or exam in their social networks **(facebook, linkedin, twitter)**, which is important for your **SMM** and increases your **website traffic** and popularity.
+
+== Additional Shortcodes ==
+
+We have developed extra shortcodes to present more data and statistics about your users on the front end. Here are some of them:
+- Single quiz results
+- All results
+- Question bank
+- Single and global leaderboards (Pro)
+- User history (Pro)
 
 For more detailed information please check the [Documentation](https://ays-pro.com/wordpress-quiz-maker-user-manual/).
 
 
 = 3RD PARTY OR EXTERNAL SERVICE DISCLAIMER =
 
-The plugin use ipinfo.io API (https://ipinfo.io/) in order to get user's location by their ip address.
+The plugin uses ipinfo.io API (https://ipinfo.io/) in order to get users' location by their ip address.
 
 IT DOES NOT SEND ANY DATA NOR DO WE COLLECT INFORMATION FROM THE REQUEST
 
@@ -127,12 +145,13 @@ The privacy policy can be found at this URL https://ipinfo.io/privacy-policy
 *   Results sheet
 *   Question Image
 *   Quiz styles(width, height, color, background etc.)
+*   Question bank
 *   Randomize questions
 *   Randomize answers
 *   Only for logged in users option
 *   Show correct answers
 *   Text for right/wrong answers
-*   Timer
+*   Quiz with Timer
 *   Fields for user data collection
 *   Styles preview
 
@@ -144,15 +163,17 @@ The privacy policy can be found at this URL https://ipinfo.io/privacy-policy
 *   Export results to CSV
 *   User location
 *   Image answers
+*   Multi-page quiz
+*   Advanaced question bank (by categories)
 *   Send email to user
 *   Send email to admin
 *   Result text according to result (according to percent)
 *   Results with charts
-*   Send certificate
+*   Quiz with a certificate
 *   Custom Attributes 
 *   Quiz Widget
 *   Copy content protection
-*   PayPal integration
+*   PayPal integration (paid quiz)
 *   Mailchimp integration
 *   Schedule quiz
 *   Campaign Monitor integration
@@ -163,7 +184,7 @@ The privacy policy can be found at this URL https://ipinfo.io/privacy-policy
 *   Email configuration
 *   Question weight/points
 *   Answer weight/points
-*   Personality quiz
+*   [Personality quiz](https://ays-pro.com/how-to-make-a-personality-quiz-on-wordpress)
 *   Leaderboards
 *   Password protected quiz
 *   Make questions required
@@ -180,8 +201,8 @@ The privacy policy can be found at this URL https://ipinfo.io/privacy-policy
 * [Video Quiz (Classic Dark Theme)](https://quiz-plugin.com/video-quiz/)
 
 
-It's your chance to add unlimited quizzes, exams, tests with one beautiful Quiz Maker plugin.
-Don't forget, in case of any problems or upcoming questions feel free to contact us via e-mail info@ays-pro.com.
+It's your chance to add unlimited quizzes, exams, tests with beautiful Quiz Maker plugin.
+Don't forget, in case of any problems, questions or suggestions feel free to contact us via [FREE SUPPORT FORUM](https://wordpress.org/support/plugin/quiz-maker/).
 
 
 
@@ -224,7 +245,7 @@ Once activated configure any options as desired and you can enjoy our Quiz maker
 
 == Frequently Asked Questions ==
 
-= 1. How to make a question? =
+= 1. How to create a question? =
 
 In order to make a **quiz/test** question:
  - First go to the **Quiz Maker** homepage>**Questions** from the admin dashboard, or choose Questions from the drop-down menu of Quiz Maker.
@@ -238,17 +259,7 @@ In order to make a **quiz/test** question:
     - Hit 'Save Question' button and your question will be saved.
  - You can always come back and edit the question from the Questions section.
 
-= 2. How to add and use question categories? =
-
-Adding categories for questions is relatively simple:
- - First, go to Quiz Maker homepage>Question Categories from the admin dashboard, or choose Question Categories from the drop-down menu of Quiz Maker.
- - Click Add New to add a category.
- - To add a category:
-    - Add the name of the category and give some description of it (optional).
-    - Hit 'Save Category' button and a new category will be made
- - You can always come back and edit the categories from the Question Categories section.
-
-= 3. How to make a quiz? =
+= 2. How to create a quiz? =
 
 In order to make a quiz/test:
  - First, go to the Quiz Maker homepage>Quizes from the admin dashboard, or choose Quizes from the drop-down menu of Quiz Maker.
@@ -263,44 +274,7 @@ In order to make a quiz/test:
     - Hit 'Save Quiz' button and your quiz will be saved.
  - You can always come back and edit the quiz from the Quizes section.
 
-= 4. How to add and use quiz categories? =
-
-Adding categories for quizzes is relatively simple:
- - First, go to Quiz Maker homepage>Quiz Categories from the admin dashboard, or choose Quiz Categories from the drop-down menu of Quiz Maker.
- - Click Add New to add a category.
- - To add a category:
-    - Add the name of the category and give some description of it (optional).
-    - Hit 'Save Category' button and a new category will be made
- - You can always come back and edit the categories from the Quiz Categories section.
-
-= 5. How to add images to the quiz? =
-
-To add an image to a quiz/test question:
-   - Simply go to the Quiz Maker homepage>Questions from the admin dashboard, or choose Questions from the drop-down menu of Quiz Maker.
-  - Click Add New or click on an existing question.
-  - Add an image by clicking the 'Add Image' button which is found at the top of the page.
-  - Choose or upload the image of your choice.
-  - Finally, hit the  'Save Question' button and your question will be saved with the newly attached image.
-
-= 6. What types are supported for quiz answers? =
-
-The supported types for answers are:
-   - Radio, which is a multiple choice option with one right answer.
-   - Checkbox, which is also a multiple choice option but it could have several right answers.
-   - Drop-down, which is the same multiple choice option with one right answer, but it occupies less place.
-You can choose a question's answer type when you are making a new question by choosing a Question Type from the drop-down.
-
-= 7. Is it easy to create a quiz with Quiz Maker? =
-
-Creating a quiz with Quiz Maker is so easy that, you can have a full quiz or an exam test in just a minute or so:
-   - First, create a Question Category to specify the type of questions that you'll make. (Instructions above)
-   - Then, create as many questions as you want for the quiz or exam test from the Questions section, choose that newly made category, add an image (optional) and save your questions. (For more info, check instructions above)
-   - Now, create a Quiz Category to specify the type of the quiz that you'll make. (Instructions above)
-   - Then, create a quiz from the Quizzes section, add the needed details, choose the questions that you previously made for this quiz from the Questions chooser and save the quiz. (For more info, check instructions above)
-   - Finally, the last step is to copy the shortcode which is shown after you make a quiz and insert it into one or many of your posts or pages.
-   - Voila, you now have a beautiful working quiz on your website. Enjoy!
-
-= 8. How to insert a quiz to a post or page? =
+= 3. How to insert a quiz to a post or page? =
 
 Now that you made your questions and insert them to the quiz, you're wondering how to insert the quiz into your website. It's so easy, here's how to do it:
    - After creating a quiz, a shortcode will be shown beside the quiz in the Quizzes section.
@@ -310,9 +284,67 @@ Now that you made your questions and insert them to the quiz, you're wondering h
 If you're wondering how to make a quiz, it's easy, just check "Is it easy to create a quiz with Quiz Maker?" above and check the instructions.
 
 
+= 4. Is it easy to create a quiz with Quiz Maker? =
+
+Creating a quiz with Quiz Maker is so easy that, you can have a full quiz or an exam test in just a minute or so:
+   - First, create a Question Category to specify the type of questions that you'll make. (Instructions above)
+   - Then, create as many questions as you want for the quiz or exam test from the Questions section, choose that newly made category, add an image (optional) and save your questions. (For more info, check instructions above)
+   - Now, create a Quiz Category to specify the type of the quiz that you'll make. (Instructions above)
+   - Then, create a quiz from the Quizzes section, add the needed details, choose the questions that you previously made for this quiz from the Questions chooser and save the quiz. (For more info, check instructions above)
+   - Finally, the last step is to copy the shortcode which is shown after you make a quiz and insert it into one or many of your posts or pages.
+   - Voila, you now have a beautiful working quiz on your website. Enjoy!
+
+
+
+
 
 
 == Changelog ==
+
+= 6.0.3 =
+* Added: Community section on the "How to use" page
+* Fixed: Correct answer option conflict with the previous button
+
+= 6.0.2 =
+* Added: Ask a question icon
+* Added: Status by pass score column for the Results list table 
+* Added: Button width option functionality for live preview
+
+= 6.0.1 =
+* Added: Button width option
+* Fixed: Division by zero PHP error in front-end
+
+= 6.0.0 =
+* Added: Orderby filter to quiz bank(questions) shortcode
+* Added: Temporary deactivation button within the deactivation popup
+* Fixed: Charset UTF-8 text printing problem on the admin dashboard
+* Fixed: Score by answered questions message variable problem
+
+= 5.9.9 =
+* Added: Category filter for quiz bank(questions) shortcode
+* Updated: PRO features
+
+= 5.9.8 =
+* Added: Display quiz bank(questions) shortcode
+
+= 5.9.7 =
+* Added: Score by answered questions message variable
+* Fixed: Check button font size problem on the front-end
+* Fixed: Checkbox question type and Twenty Twenty theme style conflict
+* Fixed: Dropdown question container position problem
+
+= 5.9.6 =
+* Added: Question text alignment option
+* Fixed: Dropdown question type and answer font-size conflict
+
+= 5.9.5 =
+* Fixed: Message before starting the quiz text font-size problem
+* Fixed: Elegant themes and timer box background issue
+* Fixed: All results and single quiz results shortcodes responsive issue 
+
+= 5.9.4 =
+* Added: Quiz box shadow parameters
+* Fixed: JS conflict with Elementor plugin
 
 = 5.9.3 =
 * Changed: Example export files on the questions list table

@@ -105,6 +105,8 @@ class Quiz_Maker_Public
      */
     public function enqueue_scripts(){
 
+        $is_elementor_exists = $this->ays_quiz_is_elementor();
+
         /**
          * This function is provided for demonstration purposes only.
          *
@@ -116,32 +118,34 @@ class Quiz_Maker_Public
          * between the defined hooks and the functions defined in this
          * class.
          */
-        wp_enqueue_script("jquery-effects-core");
-        wp_enqueue_script($this->plugin_name .'-select2js', plugin_dir_url(__FILE__) . 'js/quiz-maker-select2.min.js', array('jquery'), $this->version, true);
-        wp_enqueue_script($this->plugin_name .'-sweetalert-js', plugin_dir_url(__FILE__) . 'js/quiz-maker-sweetalert2.all.min.js', array('jquery'), $this->version, true );
-        wp_enqueue_script($this->plugin_name .'-rate-quiz', plugin_dir_url(__FILE__) . 'js/rating.min.js', array('jquery'), $this->version, true);
-        wp_enqueue_script($this->plugin_name .'-functions.js', plugin_dir_url(__FILE__) . 'js/quiz-maker-functions.js', array('jquery'), $this->version, true);
-        wp_enqueue_script($this->plugin_name .'-ajax-public', plugin_dir_url(__FILE__) . 'js/quiz-maker-public-ajax.js', array('jquery'), time(), true);
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/quiz-maker-public.js', array('jquery'), time(), true);
-        wp_localize_script($this->plugin_name . '-ajax-public', 'quiz_maker_ajax_public', array('ajax_url' => admin_url('admin-ajax.php')));
-        wp_localize_script($this->plugin_name, 'quizLangObj', array(
-            'notAnsweredText'       => __( 'You have not answered this question', $this->plugin_name ),
-            'areYouSure'            => __( 'Do you want to finish the quiz? Are you sure?', $this->plugin_name ),
-            'selectPlaceholder'     => __( 'Select an answer', $this->plugin_name ),
-            'correctAnswerVariants' => __( 'Variants of the correct answer', $this->plugin_name ),
-            'shareDialog'           => __( 'Share Dialog', $this->plugin_name ),
-            'expiredMessage'        => __( 'The quiz has expired!', $this->plugin_name ),
-            'day'                   => __( 'day', $this->plugin_name ),
-            'days'                  => __( 'days', $this->plugin_name ),
-            'hour'                  => __( 'hour', $this->plugin_name ),
-            'hours'                 => __( 'hours', $this->plugin_name ),
-            'minute'                => __( 'minute', $this->plugin_name ),
-            'minutes'               => __( 'minutes', $this->plugin_name ),
-            'second'                => __( 'second', $this->plugin_name ),
-            'seconds'               => __( 'seconds', $this->plugin_name ),
-            'startButtonText'       => $this->buttons_texts['startButton'],
-            'defaultStartButtonText'=> __( 'Start', $this->plugin_name ),
-        ) );
+        if ( ! $is_elementor_exists ) {
+            wp_enqueue_script("jquery-effects-core");
+            wp_enqueue_script($this->plugin_name .'-select2js', plugin_dir_url(__FILE__) . 'js/quiz-maker-select2.min.js', array('jquery'), $this->version, true);
+            wp_enqueue_script($this->plugin_name .'-sweetalert-js', plugin_dir_url(__FILE__) . 'js/quiz-maker-sweetalert2.all.min.js', array('jquery'), $this->version, true );
+            wp_enqueue_script($this->plugin_name .'-rate-quiz', plugin_dir_url(__FILE__) . 'js/rating.min.js', array('jquery'), $this->version, true);
+            wp_enqueue_script($this->plugin_name .'-functions.js', plugin_dir_url(__FILE__) . 'js/quiz-maker-functions.js', array('jquery'), $this->version, true);
+            wp_enqueue_script($this->plugin_name .'-ajax-public', plugin_dir_url(__FILE__) . 'js/quiz-maker-public-ajax.js', array('jquery'), time(), true);
+            wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/quiz-maker-public.js', array('jquery'), time(), true);
+            wp_localize_script($this->plugin_name . '-ajax-public', 'quiz_maker_ajax_public', array('ajax_url' => admin_url('admin-ajax.php')));
+            wp_localize_script($this->plugin_name, 'quizLangObj', array(
+                'notAnsweredText'       => __( 'You have not answered this question', $this->plugin_name ),
+                'areYouSure'            => __( 'Do you want to finish the quiz? Are you sure?', $this->plugin_name ),
+                'selectPlaceholder'     => __( 'Select an answer', $this->plugin_name ),
+                'correctAnswerVariants' => __( 'Variants of the correct answer', $this->plugin_name ),
+                'shareDialog'           => __( 'Share Dialog', $this->plugin_name ),
+                'expiredMessage'        => __( 'The quiz has expired!', $this->plugin_name ),
+                'day'                   => __( 'day', $this->plugin_name ),
+                'days'                  => __( 'days', $this->plugin_name ),
+                'hour'                  => __( 'hour', $this->plugin_name ),
+                'hours'                 => __( 'hours', $this->plugin_name ),
+                'minute'                => __( 'minute', $this->plugin_name ),
+                'minutes'               => __( 'minutes', $this->plugin_name ),
+                'second'                => __( 'second', $this->plugin_name ),
+                'seconds'               => __( 'seconds', $this->plugin_name ),
+                'startButtonText'       => $this->buttons_texts['startButton'],
+                'defaultStartButtonText'=> __( 'Start', $this->plugin_name ),
+            ) );
+        }
     }
 
     public function ays_generate_quiz_method($attr){
@@ -150,7 +154,7 @@ class Quiz_Maker_Public
 
         if (is_null($id)) {
             echo "<p class='wrong_shortcode_text' style='color:red;'>" . __('Wrong shortcode initialized', $this->plugin_name) . "</p>";
-            return false;
+            return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
         }
         
         $this->enqueue_styles();
@@ -280,10 +284,10 @@ class Quiz_Maker_Public
         
         if (is_null($quiz)) {
             echo "<p class='wrong_shortcode_text' style='color:red;'>" . __('Wrong shortcode initialized', $this->plugin_name) . "</p>";
-            return false;
+            return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
         }
         if (intval($quiz['published']) === 0) {
-            return false;
+            return str_replace(array("\r\n", "\n", "\r"), '', ob_get_clean());
         }
         $options = json_decode($quiz['options'], true);
         $options['quiz_theme'] = (array_key_exists('quiz_theme', $options)) ? $options['quiz_theme'] : '';
@@ -601,6 +605,17 @@ class Quiz_Maker_Public
         }else{
             $enable_box_shadow = false;
         }
+
+        //  Box Shadow X offset
+        $quiz_box_shadow_x_offset = (isset($options['quiz_box_shadow_x_offset']) && sanitize_text_field( $options['quiz_box_shadow_x_offset'] ) != '' && sanitize_text_field( $options['quiz_box_shadow_x_offset'] ) != 0) ? intval( sanitize_text_field( $options['quiz_box_shadow_x_offset'] ) ) : 0;
+
+        //  Box Shadow Y offset
+        $quiz_box_shadow_y_offset = (isset($options['quiz_box_shadow_y_offset']) && sanitize_text_field( $options['quiz_box_shadow_y_offset'] ) != '' && sanitize_text_field( $options['quiz_box_shadow_y_offset'] ) != 0) ? intval( sanitize_text_field( $options['quiz_box_shadow_y_offset'] ) ) : 0;
+
+        //  Box Shadow Z offset
+        $quiz_box_shadow_z_offset = (isset($options['quiz_box_shadow_z_offset']) && sanitize_text_field( $options['quiz_box_shadow_z_offset'] ) != '' && sanitize_text_field( $options['quiz_box_shadow_z_offset'] ) != 0) ? intval( sanitize_text_field( $options['quiz_box_shadow_z_offset'] ) ) : 15;
+
+        $box_shadow_offsets = $quiz_box_shadow_x_offset . 'px ' . $quiz_box_shadow_y_offset . 'px ' . $quiz_box_shadow_z_offset . 'px ';
         
         // Quiz container background image
         
@@ -711,6 +726,9 @@ class Quiz_Maker_Public
         // Disable answer hover
         $options['disable_hover_effect'] = isset($options['disable_hover_effect']) ? $options['disable_hover_effect'] : 'off';
         $disable_hover_effect = (isset($options['disable_hover_effect']) && $options['disable_hover_effect'] == "on") ? true : false;
+
+        // Question text alignment
+        $quiz_question_text_alignment = (isset($options['quiz_question_text_alignment']) && sanitize_text_field( $options['quiz_question_text_alignment'] ) != '') ? sanitize_text_field( $options['quiz_question_text_alignment'] ) : 'center';
         
         /* 
          * Quiz container background gradient
@@ -783,6 +801,17 @@ class Quiz_Maker_Public
         $buttons_font_size = '17px';
         if(isset($options['buttons_font_size']) && $options['buttons_font_size'] != ''){
             $buttons_font_size = $options['buttons_font_size'] . 'px';
+        }
+
+        // Buttons font size
+        $buttons_width = '';
+        if(isset($options['buttons_width']) && $options['buttons_width'] != ''){
+            $buttons_width = $options['buttons_width'] . 'px';
+        }
+
+        $buttons_width_html = '';
+        if( $buttons_width != ''){
+            $buttons_width_html = "min-width:" . $buttons_width;
         }
 
         // Buttons Left / Right padding
@@ -2240,7 +2269,7 @@ class Quiz_Maker_Public
         }
 
         if($enable_box_shadow){
-            $quiz_styles .=  "box-shadow: 0 0 15px 1px " . $this->hex2rgba($box_shadow_color, '0.4') . ";";
+            $quiz_styles .=  "box-shadow: ". $box_shadow_offsets ." 1px " . $this->hex2rgba($box_shadow_color, '0.4') . ";";
         }else{
             $quiz_styles .=  "box-shadow: none;";
         }
@@ -2297,11 +2326,18 @@ class Quiz_Maker_Public
                 font-size: ".$answers_font_size."px !important;
             }
     
-            #ays-quiz-container-" . $id . " .ays-quiz-timer p,
             #ays-quiz-container-" . $id . " .ays-fs-subtitle p,
             #ays-quiz-container-" . $id . " .ays_quiz_question p {
                 font-size: ".$question_font_size."px;
-                text-align: center;
+                text-align:  ". $quiz_question_text_alignment ." ;
+            }
+
+            #ays-quiz-container-" . $id . " .ays_quiz_question {
+                text-align:  ". $quiz_question_text_alignment ." ;
+            }
+
+            #ays-quiz-container-" . $id . " .ays-quiz-timer p {
+                font-size: 16px;
             }
 
             #ays-quiz-container-" . $id . " .ays_thank_you_fs p {
@@ -2464,6 +2500,7 @@ class Quiz_Maker_Public
             }
 
             /* Quiz timer */
+            #ays-quiz-container-" . $id . " div.ays-quiz-redirection-timer,
             #ays-quiz-container-" . $id . " div.ays-quiz-timer{
                 color: " . $text_color . ";
             }
@@ -2487,9 +2524,11 @@ class Quiz_Maker_Public
                 border-radius: " . $buttons_border_radius . ";
                 height: auto;
                 letter-spacing: 0;
+                " . $buttons_width_html . "
             }
             #ays-quiz-container-" . $id . " #ays_finish_quiz_" . $id . " .action-button.ays_check_answer {
                 padding: 5px 10px;
+                font-size: " . $buttons_font_size . " !important;
             }
             #ays-quiz-container-" . $id . " #ays_finish_quiz_" . $id . " .action-button.ays_restart_button {
                 white-space: nowrap;
@@ -2599,6 +2638,16 @@ class Quiz_Maker_Public
             #ays-quiz-container-" . $id . " .ays-field .select2-container--default .select2-selection--single .select2-selection__rendered,
             #ays-quiz-container-" . $id . " .select2-container--default .select2-results__option--highlighted[aria-selected] {
                 background-color: " . $color . ";
+            }
+
+            #ays-quiz-container-" . $id . " .ays-field .select2-container--default,
+            #ays-quiz-container-" . $id . " .ays-field .select2-container--default .selection,
+            #ays-quiz-container-" . $id . " .ays-field .select2-container--default .dropdown-wrapper,
+            #ays-quiz-container-" . $id . " .ays-field .select2-container--default .select2-selection--single .select2-selection__rendered,
+            #ays-quiz-container-" . $id . " .ays-field .select2-container--default .select2-selection--single .select2-selection__rendered .select2-selection__placeholder,
+            #ays-quiz-container-" . $id . " .ays-field .select2-container--default .select2-selection--single .select2-selection__arrow,
+            #ays-quiz-container-" . $id . " .ays-field .select2-container--default .select2-selection--single .select2-selection__arrow b[role='presentation'] {
+                font-size: 16px !important;
             }
             
             /* Dropdown questions scroll bar */
@@ -3696,6 +3745,13 @@ class Quiz_Maker_Public
                 }
 
                 $answered_questions_count = $questions_count - $skipped_questions_count;
+                $user_failed_questions_count = $corrects_count + ( $questions_count - ($corrects_count + $skipped_questions_count) );
+
+                if ( ! empty( $user_failed_questions_count ) || $user_failed_questions_count != 0) {
+                    $score_by_answered_questions = round( ( $corrects_count * 100 ) / $user_failed_questions_count , 1 );
+                } else {
+                    $score_by_answered_questions = 0;
+                }
 
                 // $correct_answered_count = array_sum($correctness);
 
@@ -3733,6 +3789,7 @@ class Quiz_Maker_Public
                     'wrong_answers_count' => $wrong_answered_count,
                     'skipped_questions_count' => $skipped_questions_count,
                     'answered_questions_count' => $answered_questions_count,
+                    'score_by_answered_questions' => $score_by_answered_questions,
                 );
 
                 $data = array(
@@ -4918,16 +4975,18 @@ class Quiz_Maker_Public
     }
 
     public function ays_quiz_is_elementor(){
-        if ( defined( 'ELEMENTOR_PATH' ) && class_exists( 'Elementor\Widget_Base' ) ) {
-            if ( class_exists( 'Elementor\Plugin' ) ) {
-                if ( is_callable( 'Elementor\Plugin', 'instance' ) ) {
-                    $elementor = Elementor\Plugin::instance();
-                    if ( isset( $elementor->preview ) ) {
-                        return \Elementor\Plugin::$instance->preview->is_preview_mode();
-                    }
-                }
-            }
-        }
+        // if ( defined( 'ELEMENTOR_PATH' ) && class_exists( 'Elementor\Widget_Base' ) ) {
+        //     if ( class_exists( 'Elementor\Plugin' ) ) {
+        //         if ( is_callable( 'Elementor\Plugin', 'instance' ) ) {
+        //             $elementor = Elementor\Plugin::instance();
+        //             if ( isset( $elementor->preview ) ) {
+        //                 return \Elementor\Plugin::$instance->preview->is_preview_mode();
+        //             }
+        //         }
+        //     }
+        // }
+        $is_elementor = isset( $_GET['action'] ) && $_GET['action'] == 'elementor' ? true : false;
+        return $is_elementor;
     }
 
     public static function ays_quiz_is_enable_question_max_length( $question_id , $question_type = 'text' ){
